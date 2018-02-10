@@ -1,0 +1,37 @@
+body {
+  background-image: url("../images/space.jpg");
+}
+
+#openingHeader {
+  text-align: center;
+  color: #3eb6d1;
+}
+
+.characters,
+.enemies,
+.defender,
+.defeated {
+  text-align: center;
+}
+
+.images {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: inline-block;
+  z-index: 3;
+}
+
+progress {
+  -webkit-appearance: none;
+  width: 200px;
+  height: 10px;
+  position: relative;   
+  display: inline-block;
+  z-index: 5;
+}
+
+progress::-webkit-progress-value {
+    background-color: rgb(215, 8, 8);
+    box-shadow:  inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+}
