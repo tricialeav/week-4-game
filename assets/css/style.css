@@ -2,9 +2,13 @@ body {
   background-image: url("../images/space.jpg");
 }
 
+h1 {
+    text-align: center;
+}
+
 #openingHeader {
   text-align: center;
-  color: #3eb6d1;
+  color: #1017d3;
 }
 
 .characters,
@@ -20,6 +24,8 @@ body {
   position: relative;
   display: inline-block;
   z-index: 3;
+  border-radius: 160px;
+  left: 160px;
 }
 
 progress {
@@ -27,11 +33,27 @@ progress {
   width: 200px;
   height: 10px;
   position: relative;   
-  display: inline-block;
+  display: block;
   z-index: 5;
+}
+
+#health1 {
+    top: -137px;
+    left: 160px;
+}
+
+#health2 {
+    bottom: -119px;
+    left: 160px;
 }
 
 progress::-webkit-progress-value {
     background-color: rgb(215, 8, 8);
     box-shadow:  inset 0px 0px 7px 0px rgba(0,0,0,0.75);
+}
+
+button {
+    position: relative; 
+    top: -27px;
+    left: 611px;
 }
