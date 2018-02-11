@@ -17,27 +17,9 @@ $(".gameplay").hide();
 $(".attack").hide();
 $(".healthbar").hide();
 
-$(document).ready(function() {
-  avatar;
-  opponent;
-  attack = $("button");
-  dir = $("#instructionText");
-  leia = $("#leia");
-  luke = $("#luke");
-  vader = $("#vader");
-  boba = $("#boba");
-  p1HpBar = $("#health1");
-  p2HpBar = $("#health2");
-  p1HpText = $("#h1No");
-  p2HpText = $("#h2No");
-  let curHp1 = 100;
-  let curHp2 = 100;
+//   Functions
 
-  dir.text("Please Select a Character");
-
-  //   Functions
-
-  function showHealth1() {
+function showHealth1() {
     p1HpBar.show("slow");
   }
   function showHealth2() {
@@ -67,57 +49,55 @@ $(document).ready(function() {
   function pickRoundTwo() {
     if (opponent.attr("id") === leia.attr("id")) {
       if (avatar === "luke") {
-        vader.on("click", chooseVader);
-        boba.on("click", chooseBoba);
+        vader.on("click", vaderOpponent);
+        boba.on("click", BobaOpponent);
       } else if (avatar === "vader") {
-        leia.on("click", chooseLeia);
-        boba.on("click", chooseBoba);
+        leia.on("click", leiaOpponent);
+        boba.on("click", BobaOpponent);
       } else if (avatar === "boba") {
-        leia.on("click", chooseLeia);
-        vader.on("click", chooseBoba);
+        leia.on("click", leiaOpponent);
+        vader.on("click", BobaOpponent);
       }
     } else if (opponent.attr("id") === luke.attr("id")) {
       if (avatar === "leia") {
-        vader.on("click", chooseVader);
-        boba.on("click", chooseBoba);
+        vader.on("click", vaderOpponent);
+        boba.on("click", BobaOpponent);
       } else if (avatar === "vader") {
-        leia.on("click", chooseLeia);
-        boba.on("click", chooseBoba);
+        leia.on("click", leiaOpponent);
+        boba.on("click", BobaOpponent);
       } else if (avatar === "boba") {
-        leia.on("click", chooseLeia);
-        vader.on("click", chooseVader);
+        leia.on("click", leiaOpponent);
+        vader.on("click", vaderOpponent);
       }
     } else if (opponent.attr("id") === vader.attr("id")) {
       if (avatar === "leia") {
-        luke.on("click", chooseLuke);
-        boba.on("click", chooseBoba);
+        luke.on("click", lukeOpponent);
+        boba.on("click", BobaOpponent);
       } else if (avatar === "luke") {
-        leia.on("click", chooseLeia);
-        boba.on("click", chooseBoba);
+        leia.on("click", leiaOpponent);
+        boba.on("click", BobaOpponent);
       } else if (avatar === "boba") {
-        leia.on("click", chooseLeia);
-        luke.on("click", chooseLuke);
+        leia.on("click", leiaOpponent);
+        luke.on("click", lukeOpponent);
       }
     } else if (opponent.attr("id") === boba.attr("id")) {
       if (avatar === "leia") {
-        luke.on("click", chooseLuke);
-        vader.on("click", chooseVader);
+        luke.on("click", lukeOpponent);
+        vader.on("click", vaderOpponent);
       } else if (avatar === "luke") {
-        leia.on("click", chooseLeia);
-        vader.on("click", chooseVader);
+        leia.on("click", leiaOpponent);
+        vader.on("click", vaderOpponent);
       } else if (avatar === "vader") {
-        leia.on("click", chooseLeia);
-        luke.on("click", chooseLuke);
+        leia.on("click", leiaOpponent);
+        luke.on("click", lukeOpponent);
       }
     }
   }
 
-  function chooseLeia() {
+  function leiaOpponent() {
     healthReset();
     removeDir();
     opponent = leia;
-    curHp1 = 100;
-    curHp2 = 100;
     leia.animate({ top: "406px" });
     showHealth2();
     p2HpText.text(curHp2);
@@ -125,14 +105,13 @@ $(document).ready(function() {
     boba.animate({ top: "279px", left: "30px" });
     $(".attack").show();
     clickOff();
+    enableAttack()
   }
 
-  function chooseLuke() {
+  function lukeOpponent() {
     healthReset();
     removeDir();
     opponent = luke;
-    curHp1 = 100;
-    curHp2 = 100;
     luke.animate({ top: "406px", left: "-204px" });
     showHealth2();
     p2HpText.text(curHp2);
@@ -140,34 +119,33 @@ $(document).ready(function() {
     boba.animate({ top: "279px", left: "30px" });
     $(".attack").show();
     clickOff();
+    enableAttack()
   }
 
-  function chooseVader() {
+  function vaderOpponent() {
     healthReset();
     removeDir();
     opponent = vader;
-    curHp1 = 100;
-    curHp2 = 100;
     vader.animate({ top: "406px", left: "-408px" });
     showHealth2();
     luke.animate({ top: "50px", left: "435px" });
     boba.animate({ top: "279px", left: "30px" });
     $(".attack").show();
     clickOff();
+    enableAttack()
   }
 
-  function chooseBoba() {
+  function BobaOpponent() {
     healthReset();
     removeDir();
     opponent = boba;
-    curHp1 = 100;
-    curHp2 = 100;
     boba.animate({ top: "406px", left: "-613px" });
     showHealth2();
     luke.animate({ top: "50px", left: "435px" });
     vader.animate({ top: "279px", left: "231px" });
     $(".attack").show();
     clickOff();
+    enableAttack()
   }
 
   //   Gameplay Functions
@@ -204,16 +182,13 @@ $(document).ready(function() {
     }
   }
 
-  function roundOne() {
-    console.log("attack");
-    clickOff();
-    attacks();
-  }
+//   function rounds() {
+//     console.log("attack");
+//     // clickOff();
+//     attacks();
+//   }
 
-  // Choose Avatar/Opponent
-
-  // Avatar Leia
-  leia.on("click", function() {
+  function beginGame() { 
     avatar = "leia";
     dir.text("Please Select an Opponent");
     leia.animate({ top: "-56px" });
@@ -226,21 +201,48 @@ $(document).ready(function() {
 
     // Opponent Luke
     luke.click(function() {
-      chooseLuke();
+      lukeOpponent();
     });
     // Opponent Vader
     vader.click(function() {
-      chooseVader();
+      vaderOpponent();
     });
 
     // Opponent Boba Fett
     boba.click(function() {
-      chooseBoba();
+      BobaOpponent();
     });
 
-    //   Play Game
-    attack.on("click", function() {
-      roundOne();
-    });
+  }
+
+function enableAttack() {
+    attack.on('click', attacks);
+}
+
+
+$(document).ready(function() {
+  avatar;
+  opponent;
+  attack = $("button");
+  dir = $("#instructionText");
+  leia = $("#leia");
+  luke = $("#luke");
+  vader = $("#vader");
+  boba = $("#boba");
+  p1HpBar = $("#health1");
+  p2HpBar = $("#health2");
+  p1HpText = $("#h1No");
+  p2HpText = $("#h2No");
+  let curHp1 = 100;
+  let curHp2 = 100;
+
+  dir.text("Please Select a Character");
+
+  // Choose Avatar/Opponent
+
+  // Avatar Leia
+  leia.on("click", function() {
+    beginGame();
   });
 });
+
