@@ -16,30 +16,31 @@
     <div id="pageWrap" class="container">
        <h1>Star Wars RPG</h1>
 
-        <h2 id="openingHeader">A long time ago in a galaxy far, far away...</h2>
-        <p id ="scrolltext">Scrolltext goes here</p>
+        <h2 id="openingHeader"></h2>
+        <p id ="scrolltext"></p>
         
         <!-- Character Choices  -->
-        <div class="characters"><h3>Choose a Character</h3></div>
+        <h3 id="instructionText"></h3>
         <img src="assets/images/Leia.jpg" id="leia" class="images" alt="Princess Leia">
         <img src="assets/images/Luke.jpg" id="luke" class="images" alt="Luke Skywalker"> 
         <img src="assets/images/Vader.jpg" id="vader" class="images" alt="Darth Vader">
         <img src="assets/images/Boba.jpg" id="boba" class="images" alt="Boba Fett">
 
-        <progress id="health1" class = "healthbar" value="100" max="100"></progress>
-        <progress id="health2" class = "healthbar" value="100" max="100"></progress>
+
+        <progress id="health1" class = "healthbar" value="100" max="100" min="1"></progress><h3 id="h1No"></h3>
+        <progress id="health2" class = "healthbar" value="100" max="100" min="0"></progress><h3 id="h2No"></h3>
         
        
      
        
         
-        <div id ="defender" class="gameplay"><h3>Enemy</h3></div>
-        <div id = "defeated" class="gameplay"><h3>Defeated</h3></div>
-        <div id="enemies" class="gameplay"><h3>Other Characters</h3></div>
+        <div id ="defender" class="gameplay"><h3></h3></div>
+        <div id = "defeated" class="gameplay"><h3></h3></div>
+        <div id="enemies" class="gameplay"><h3></h3></div>
 
         
 
-        <button type="button" class="attack">Attack</button>
+        <button type="button" class="attack">Click to Attack</button>
 
 
 
