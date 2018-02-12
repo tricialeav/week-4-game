@@ -19,6 +19,7 @@ let hp1;
 let hp2;
 let curHp1;
 let curHp2;
+let gamesPlayed;
 
 // Hide elements on start
 $("#avatar").css("visibility", "hidden");
@@ -100,7 +101,7 @@ function opponents() {
 
 function leiaOpponent() {
   opponent = leia;
-  leia.animate({ top: "406px", left: "0px" });
+  leia.animate({ top: "268px", left: "0px" });
   healthReset();
   showOnRound();
   opponents();
@@ -109,7 +110,7 @@ function leiaOpponent() {
 
 function lukeOpponent() {
   opponent = luke;
-  luke.animate({ top: "214px", left: "-204px" });
+  luke.animate({ top: "268px", left: "-204px" });
   healthReset();
   showOnRound();
   opponents();
@@ -118,7 +119,7 @@ function lukeOpponent() {
 
 function vaderOpponent() {
   opponent = vader;
-  vader.animate({ top: "406px", left: "-408px" });
+  vader.animate({ top: "268px", left: "-408px" });
   healthReset();
   showOnRound();
   opponents();
@@ -127,7 +128,7 @@ function vaderOpponent() {
 
 function BobaOpponent() {
   opponent = boba;
-  boba.animate({ top: "406px", left: "-613px" });
+  boba.animate({ top: "268px", left: "-613px" });
   healthReset();
   showOnRound();
   opponents();
@@ -183,10 +184,10 @@ function nextOpponent() {
 }
 
 function attacks() {
-  let p1Roll = Math.floor(Math.random() * 10);
+  let p1Roll = Math.floor(Math.random() * 20);
   let p2Roll = Math.floor(Math.random() * 10);
-  curHp1 = curHp1 - (p1Roll * counterAttack);
-  curHp2 = curHp2 - (p2Roll * attackPowerUp);
+  curHp1 = curHp1 - (p2Roll * counterAttack);
+  curHp2 = curHp2 - (p1Roll * attackPowerUp);
   attackPowerUp = attackPower + attackPowerUp;
   avatarText.text("Attack Power: " + attackPowerUp);
   //   both player's hp above 1
@@ -212,16 +213,24 @@ function attacks() {
   } else if (parseInt(curHp1) >= 0 && parseInt(curHp2) <= 0) {
     //   Player wins
     hideOnWin();
+    gamesPlayed += 1;
+    if (gamesPlayed < 3 ) {
     dir.text("The force is strong with you. Select next opponent.");
     attack.off("click");
     opponent.fadeTo("fast", 0);
     attackPowerUp = attackPower;
     nextOpponent();
+    } else{
+      dir.text("You've defeated your opponents! Remember – the Force will be with you, always.");
+      opponent.css('visibility', 'hidden');
+      attack.css('visibility', 'hidden');
+      avatar.animate({ top: '66px', left: '309px' });
+    }
   } else {
     //   Both die
     hideAll();
     dir.text(
-      "Never tell me the odds...Both players have died. Press the button to play again!"
+      "Never tell me the odds! Both players have died. Press the button to play again!"
     );
     attack.animate({ left: "0px" });
     attack.text("Try Again?");
@@ -241,26 +250,26 @@ function beginGame() {
   hp1 = 500;
   showHealth1();
   if (avatar.attr("id") === leia.attr("id")) {
-    leia.animate({ top: "-270px" });
+    leia.animate({ top: "-280px" });
     stats();
     clickOff();
   } else if (avatar.attr("id") === luke.attr("id")) {
-    luke.animate({ top: "-56px", left: "-204px" });
+    luke.animate({ top: "-280px", left: "-204px" });
     stats();
-    leia.animate({ top: "179px", left: "204px" });
+    leia.animate({ left: "204px" });
     clickOff();
   } else if (avatar.attr("id") === vader.attr("id")) {
-    vader.animate({ top: "-56px", left: "-408px" });
+    vader.animate({ top: "-280px", left: "-408px" });
     stats();
-    leia.animate({ top: "179px", left: "204px" });
-    luke.animate({ top: "179px", left: "204px" });
+    leia.animate({ left: "204px" });
+    luke.animate({ left: "204px" });
     clickOff();
   } else if (avatar.attr("id") === boba.attr("id")) {
-    boba.animate({ top: "-56px", left: "-612px" });
+    boba.animate({ top: "-280px", left: "-612px" });
     stats();
-    leia.animate({ top: "179px", left: "204px" });
-    luke.animate({ top: "179px", left: "204px" });
-    vader.animate({ top: "179px", left: "204px" });
+    leia.animate({ left: "204px" });
+    luke.animate({ left: "204px" });
+    vader.animate({ left: "204px" });
     clickOff();
   }
 
@@ -310,6 +319,7 @@ $(document).ready(function() {
   hp2;
   curHp1;
   curHp2;
+  gamesPlayed = 0;
 
   dir.text("Please Select a Character");
 
