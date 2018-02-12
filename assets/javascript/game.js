@@ -1,44 +1,49 @@
-// Global Variables
-
+let avatar;
+let avatarText;
+let opponentText;
+let opponent;
+let attack;
+let title;
+let dir;
 let leia;
 let luke;
 let vader;
 let boba;
-let leiaDmg;
-let avatar;
-let opponent;
-let title;
-let dir;
+let attackPower;
+let attackPowerUp;
 let p1HpBar;
 let p2HpBar;
-let attack;
+let p1HpText;
+let p2HpText;
+let hp1;
+let hp2;
+let curHp1;
+let curHp2;
 
 // Hide elements on start
-$(".characters").hide();
-$(".gameplay").hide();
-$(".attack").hide();
-$(".healthbar").hide();
+$("#avatar").css("visibility", "hidden");
+$("#opponents").css("visibility", "hidden");
+$(".attack").css("visibility", "hidden");
+$(".healthbar").css("visibility", "hidden");
+$("#h1No").css("visibility", "hidden");
 
-//   Functions
+// General Functions
 
 function showHealth1() {
-  p1HpBar.show("slow");
+  p1HpBar.css("visibility", "visible");
 }
 function showHealth2() {
-  p2HpBar.show("slow");
-}
-
-function removeDir() {
-  dir.text("");
+  p2HpBar.css("visibility", "visible");
 }
 
 function healthReset() {
-  p1HpText.text("100");
-  p2HpText.text("100");
-  p1HpBar.val(100);
-  p2HpBar.val(100);
-  curHp1 = 100;
-  curHp2 = 100;
+  hp2 = 500;
+  p1HpText.text(hp1);
+  p2HpText.text(hp2);
+  p1HpBar.val(hp1);
+  p2HpBar.val(hp2);
+  curHp1 = hp1;
+  curHp2 = hp2;
 }
 
 function clickOff() {
@@ -48,167 +53,211 @@ function clickOff() {
   boba.off("click");
 }
 
-function pickRoundTwo() {
+function hideAll() {
+    leia.css("visibility", "hidden");
+    luke.css("visibility", "hidden");
+    vader.css("visibility", "hidden");
+    boba.css("visibility", "hidden");
+    avatarText.css("visibility", "hidden");
+    opponentText.css("visibility", "hidden");
+    p1HpBar.css("visibility", "hidden");
+    p2HpBar.css("visibility", "hidden");
+    p1HpText.css("visibility", "hidden");
+    p2HpText.css("visibility", "hidden");
+  }
+  
+  function hideOnWin() {
+    avatarText.css("visibility", "hidden");
+    opponentText.css("visibility", "hidden");
+    p1HpBar.css("visibility", "hidden");
+    p2HpBar.css("visibility", "hidden");
+    p1HpText.css("visibility", "hidden");
+    p2HpText.css("visibility", "hidden");
+  }
+  
+  function showOnRound() {
+    avatarText.css("visibility", "visible");
+    opponentText.css("visibility", "visible");
+    p1HpBar.css("visibility", "visible");
+    p2HpBar.css("visibility", "visible");
+    p1HpText.css("visibility", "visible");
+    p2HpText.css("visibility", "visible");
+  }
+
+//   Gameplay Functions
+
+function opponents() {
+  counterAttack = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
+  dir.text("Click the Button to Attack");
+  showHealth2();
+  $(".attack").css("visibility", "visible");
+  avatarText.css("visibility", "visible");
+  avatarText.text("Attack Multiplier: " + attackPowerUp);
+  opponentText.css("visibility", "visible");
+  opponentText.text("Counter Attack Multiplier: " + counterAttack);
+  clickOff();
+}
+
+function leiaOpponent() {
+  opponent = leia;
+  leia.animate({ top: "406px", left: "0px" });
+  healthReset();
+  showOnRound();
+  opponents();
+  enableAttack();
+}
+
+function lukeOpponent() {
+  opponent = luke;
+  luke.animate({ top: "214px", left: "-204px" });
+  healthReset();
+  showOnRound();
+  opponents();
+  enableAttack();
+}
+
+function vaderOpponent() {
+  opponent = vader;
+  vader.animate({ top: "406px", left: "-408px" });
+  healthReset();
+  showOnRound();
+  opponents();
+  enableAttack();
+}
+
+function BobaOpponent() {
+  opponent = boba;
+  boba.animate({ top: "406px", left: "-613px" });
+  healthReset();
+  showOnRound();
+  opponents();
+  enableAttack();
+}
+
+function nextOpponent() {
   if (opponent.attr("id") === leia.attr("id")) {
-    if (avatar === "luke") {
+    if (avatar.attr("id") === luke.attr("id")) {
       vader.on("click", vaderOpponent);
       boba.on("click", BobaOpponent);
-    } else if (avatar === "vader") {
+    } else if (avatar.attr("id") === vader.attr("id")) {
       leia.on("click", leiaOpponent);
       boba.on("click", BobaOpponent);
-    } else if (avatar === "boba") {
+    } else if (avatar.attr("id") === boba.attr("id")) {
       leia.on("click", leiaOpponent);
       vader.on("click", BobaOpponent);
     }
   } else if (opponent.attr("id") === luke.attr("id")) {
-    if (avatar === "leia") {
+    if (avatar.attr("id") === leia.attr("id")) {
       vader.on("click", vaderOpponent);
       boba.on("click", BobaOpponent);
-    } else if (avatar === "vader") {
+    } else if (avatar.attr("id") === vader.attr("id")) {
       leia.on("click", leiaOpponent);
       boba.on("click", BobaOpponent);
-    } else if (avatar === "boba") {
+    } else if (avatar.attr("id") === boba.attr("id")) {
       leia.on("click", leiaOpponent);
       vader.on("click", vaderOpponent);
     }
   } else if (opponent.attr("id") === vader.attr("id")) {
-    if (avatar === "leia") {
+    if (avatar.attr("id") === leia.attr("id")) {
       luke.on("click", lukeOpponent);
       boba.on("click", BobaOpponent);
-    } else if (avatar === "luke") {
+    } else if (avatar.attr("id") === luke.attr("id")) {
       leia.on("click", leiaOpponent);
       boba.on("click", BobaOpponent);
-    } else if (avatar === "boba") {
+    } else if (avatar.attr("id") === boba.attr("id")) {
       leia.on("click", leiaOpponent);
       luke.on("click", lukeOpponent);
     }
   } else if (opponent.attr("id") === boba.attr("id")) {
-    if (avatar === "leia") {
+    if (avatar.attr("id") === leia.attr("id")) {
       luke.on("click", lukeOpponent);
       vader.on("click", vaderOpponent);
-    } else if (avatar === "luke") {
+    } else if (avatar.attr("id") === luke.attr("id")) {
       leia.on("click", leiaOpponent);
       vader.on("click", vaderOpponent);
-    } else if (avatar === "vader") {
+    } else if (avatar.attr("id") === vader.attr("id")) {
       leia.on("click", leiaOpponent);
       luke.on("click", lukeOpponent);
     }
   }
 }
 
-function leiaOpponent() {
-  healthReset();
-  removeDir();
-  opponent = leia;
-  leia.animate({ top: "406px", left: "0px" });
-  showHealth2();
-  p2HpText.text(curHp2);
-  $(".attack").show();
-  clickOff();
-  enableAttack();
-}
-
-function lukeOpponent() {
-  healthReset();
-  removeDir();
-  opponent = luke;
-  luke.animate({ top: "406px", left: "-204px" });
-  showHealth2();
-  p2HpText.text(curHp2);
-  $(".attack").show();
-  clickOff();
-  enableAttack();
-}
-
-function vaderOpponent() {
-  healthReset();
-  removeDir();
-  opponent = vader;
-  vader.animate({ top: "406px", left: "-408px" });
-  showHealth2();
-  $(".attack").show();
-  clickOff();
-  enableAttack();
-}
-
-function BobaOpponent() {
-  healthReset();
-  removeDir();
-  opponent = boba;
-  boba.animate({ top: "406px", left: "-613px" });
-  showHealth2();
-  $(".attack").show();
-  clickOff();
-  enableAttack();
-}
-
-//   Gameplay Functions
-
 function attacks() {
-  let p1Roll = Math.floor(Math.random() * 25);
-  let p2Roll = Math.floor(Math.random() * 50);
-  curHp1 = curHp1 - p1Roll;
-  curHp2 = curHp2 - p2Roll;
+  let p1Roll = Math.floor(Math.random() * 10);
+  let p2Roll = Math.floor(Math.random() * 10);
+  curHp1 = curHp1 - (p1Roll * counterAttack);
+  curHp2 = curHp2 - (p2Roll * attackPowerUp);
+  attackPowerUp = attackPower + attackPowerUp;
+  avatarText.text("Attack Power: " + attackPowerUp);
+  //   both player's hp above 1
   if (parseInt(curHp1) > 0 && parseInt(curHp2) > 0) {
     p1HpBar.val(curHp1);
     p1HpText.text(curHp1);
     p2HpBar.val(curHp2);
     p2HpText.text(curHp2);
-  } else if (parseInt(curHp1) <= 0 && parseInt(curHp2) <= 1) {
+  } 
+  //   Player loses
+  else if (parseInt(curHp1) <= 0 && parseInt(curHp2) >= 1) {
     attack.off("click");
-    p1HpText.text("0");
-    p1HpBar.val(0);
-    attack.text("");
-    dir.text("You were defeated! Press the button to play again.");
+    hideAll();
+    avatar.css("visibility", "hidden");
+    dir.text(
+      "You underestimate the power of the dark side. Press the button to play again."
+    );
+    attack.animate({ left: "0px" });
     attack.text("Try Again?");
     attack.on("click", function() {
       location.reload();
     });
   } else if (parseInt(curHp1) >= 0 && parseInt(curHp2) <= 0) {
-    p2HpText.text("0");
-    p2HpBar.val(0);
-    dir.text("You won! Please select new opponent.");
+    //   Player wins
+    hideOnWin();
+    dir.text("The force is strong with you. Select next opponent.");
     attack.off("click");
     opponent.fadeTo("fast", 0);
-    pickRoundTwo();
+    attackPowerUp = attackPower;
+    nextOpponent();
   } else {
-    console.log(tie);
+    //   Both die
+    hideAll();
+    dir.text(
+      "Never tell me the odds...Both players have died. Press the button to play again!"
+    );
+    attack.animate({ left: "0px" });
+    attack.text("Try Again?");
+    attack.on("click", function() {
+      location.reload();
+    });
   }
 }
 
+function stats() {
+  dir.text("Please Select an Opponent");
+  p1HpText.css("visibility", "visible");
+  p1HpText.text(hp1);
+}
+
 function beginGame() {
-  if (avatar === "leia") {
-    dir.text("Please Select an Opponent");
-    leia.animate({ top: "-56px" });
-    showHealth1();
-    p1HpText.text("100");
-    luke.animate({ top: "179px" });
-    vader.animate({ top: "179px" });
-    boba.animate({ top: "179px" });
+  hp1 = 500;
+  showHealth1();
+  if (avatar.attr("id") === leia.attr("id")) {
+    leia.animate({ top: "-270px" });
+    stats();
     clickOff();
-  } else if (avatar === "luke") {
-    dir.text("Please Select an Opponent");
+  } else if (avatar.attr("id") === luke.attr("id")) {
     luke.animate({ top: "-56px", left: "-204px" });
-    showHealth1();
-    p1HpText.text("100");
+    stats();
     leia.animate({ top: "179px", left: "204px" });
-    vader.animate({ top: "179px" });
-    boba.animate({ top: "179px" });
     clickOff();
-  } else if (avatar === "vader") {
-    dir.text("Please Select an Opponent");
+  } else if (avatar.attr("id") === vader.attr("id")) {
     vader.animate({ top: "-56px", left: "-408px" });
-    showHealth1();
-    p1HpText.text("100");
+    stats();
     leia.animate({ top: "179px", left: "204px" });
     luke.animate({ top: "179px", left: "204px" });
-    boba.animate({ top: "179px" });
     clickOff();
-  } else if (avatar === "boba") {
-    dir.text("Please Select an Opponent");
+  } else if (avatar.attr("id") === boba.attr("id")) {
     boba.animate({ top: "-56px", left: "-612px" });
-    showHealth1();
-    p1HpText.text("100");
+    stats();
     leia.animate({ top: "179px", left: "204px" });
     luke.animate({ top: "179px", left: "204px" });
     vader.animate({ top: "179px", left: "204px" });
@@ -241,6 +290,8 @@ function enableAttack() {
 
 $(document).ready(function() {
   avatar;
+  avatarText = $("#avatar");
+  opponentText = $("#opponents");
   opponent;
   attack = $("button");
   title = $("h1");
@@ -249,32 +300,35 @@ $(document).ready(function() {
   luke = $("#luke");
   vader = $("#vader");
   boba = $("#boba");
-  leiaDmg = 
+  attackPower = Math.floor(Math.random() * 6) + 1;
+  attackPowerUp = attackPower;
   p1HpBar = $("#health1");
   p2HpBar = $("#health2");
   p1HpText = $("#h1No");
   p2HpText = $("#h2No");
-  let curHp1 = 100;
-  let curHp2 = 100;
+  hp1;
+  hp2;
+  curHp1;
+  curHp2;
 
   dir.text("Please Select a Character");
 
   // Choose Avatar to Begin
 
   leia.on("click", function() {
-    avatar = "leia";
+    avatar = leia;
     beginGame();
   });
   luke.on("click", function() {
-    avatar = "luke";
+    avatar = luke;
     beginGame();
   });
   vader.on("click", function() {
-    avatar = "vader";
+    avatar = vader;
     beginGame();
   });
   boba.on("click", function() {
-    avatar = "boba";
+    avatar = boba;
     beginGame();
   });
 });

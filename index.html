@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|Syncopate:700|Titillium+Web:900" rel="stylesheet">
     </style>
     <link rel="stylesheet" href="assets/css/style.css">
     </style>
@@ -14,31 +15,36 @@
 <body>
 
     <div id="pageWrap" class="container">
-       <h1>Star Wars RPG</h1>
+        <h1 id='star'>STAR</h1>
+        <h3 id='gameTitle'>The Role-Playing Game</h3>
+        <h1 id='wars'>WARS</h1>
 
         <h2 id="openingHeader"></h2>
-        <p id ="scrolltext"></p>
-        
+        <p id="scrolltext"></p>
+
         <!-- Character Choices  -->
         <h3 id="instructionText"></h3>
         <img src="assets/images/Leia.jpg" id="leia" class="images" alt="Princess Leia">
-        <img src="assets/images/Luke.jpg" id="luke" class="images" alt="Luke Skywalker"> 
+        <img src="assets/images/Luke.jpg" id="luke" class="images" alt="Luke Skywalker">
         <img src="assets/images/Vader.jpg" id="vader" class="images" alt="Darth Vader">
         <img src="assets/images/Boba.jpg" id="boba" class="images" alt="Boba Fett">
 
 
-        <progress id="health1" class = "healthbar" value="100" max="100" min="1"></progress><h3 id="h1No"></h3>
-        <progress id="health2" class = "healthbar" value="100" max="100" min="0"></progress><h3 id="h2No"></h3>
-        
-       
-     
-       
-        
-        <div id ="defender" class="gameplay"><h3></h3></div>
-        <div id = "defeated" class="gameplay"><h3></h3></div>
-        <div id="enemies" class="gameplay"><h3></h3></div>
+        <progress id="health1" class="healthbar" value="500" max="500" min="0"></progress>
+        <h3 id="h1No"></h3>
+        <h3 id="avatar" class="gameplay"></h3>
+        <progress id="health2" class="healthbar" value="500" max="500" min="0"></progress>
+        <h3 id="h2No"></h3>
+        <h3 id="opponents" class="gameplay"></h3>
+
+
+
 
         
+        
+        <h3 id="stats" class="gameplay"></h3>
+
+
 
         <button type="button" class="attack">Click to Attack</button>
 
