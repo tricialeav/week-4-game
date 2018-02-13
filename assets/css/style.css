@@ -145,3 +145,16 @@ button {
   top: -396px;
   left: -307px;
 }
+
+#howToPlay {
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  letter-spacing: 5px;
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow,
+    1px 1px 0 yellow;
+  padding: 0;
+  display: block;
+}

@@ -126,7 +126,7 @@ function vaderOpponent() {
   enableAttack();
 }
 
-function BobaOpponent() {
+function bobaOpponent() {
   opponent = boba;
   boba.animate({ top: "268px", left: "-613px" });
   healthReset();
@@ -139,21 +139,21 @@ function nextOpponent() {
   if (opponent.attr("id") === leia.attr("id")) {
     if (avatar.attr("id") === luke.attr("id")) {
       vader.on("click", vaderOpponent);
-      boba.on("click", BobaOpponent);
+      boba.on("click", bobaOpponent);
     } else if (avatar.attr("id") === vader.attr("id")) {
-      leia.on("click", leiaOpponent);
-      boba.on("click", BobaOpponent);
+      luke.on("click", lukeOpponent);
+      boba.on("click", bobaOpponent);
     } else if (avatar.attr("id") === boba.attr("id")) {
-      leia.on("click", leiaOpponent);
-      vader.on("click", BobaOpponent);
+      luke.on("click", lukeOpponent);
+      vader.on("click", vaderOpponent);
     }
   } else if (opponent.attr("id") === luke.attr("id")) {
     if (avatar.attr("id") === leia.attr("id")) {
       vader.on("click", vaderOpponent);
-      boba.on("click", BobaOpponent);
+      boba.on("click", bobaOpponent);
     } else if (avatar.attr("id") === vader.attr("id")) {
       leia.on("click", leiaOpponent);
-      boba.on("click", BobaOpponent);
+      boba.on("click", bobaOpponent);
     } else if (avatar.attr("id") === boba.attr("id")) {
       leia.on("click", leiaOpponent);
       vader.on("click", vaderOpponent);
@@ -161,10 +161,10 @@ function nextOpponent() {
   } else if (opponent.attr("id") === vader.attr("id")) {
     if (avatar.attr("id") === leia.attr("id")) {
       luke.on("click", lukeOpponent);
-      boba.on("click", BobaOpponent);
+      boba.on("click", bobaOpponent);
     } else if (avatar.attr("id") === luke.attr("id")) {
       leia.on("click", leiaOpponent);
-      boba.on("click", BobaOpponent);
+      boba.on("click", bobaOpponent);
     } else if (avatar.attr("id") === boba.attr("id")) {
       leia.on("click", leiaOpponent);
       luke.on("click", lukeOpponent);
@@ -184,7 +184,7 @@ function nextOpponent() {
 }
 
 function attacks() {
-  let p1Roll = Math.floor(Math.random() * 20);
+  let p1Roll = Math.floor(Math.random() * 10);
   let p2Roll = Math.floor(Math.random() * 10);
   curHp1 = curHp1 - (p2Roll * counterAttack);
   curHp2 = curHp2 - (p1Roll * attackPowerUp);
@@ -224,7 +224,15 @@ function attacks() {
       dir.text("You've defeated your opponents! Remember – the Force will be with you, always.");
       opponent.css('visibility', 'hidden');
       attack.css('visibility', 'hidden');
-      avatar.animate({ top: '66px', left: '309px' });
+      if (avatar.attr('id') === leia.attr('id')) {
+        leia.animate({ top: '66px', left: '309px' });
+      } else if (avatar.attr('id') === luke.attr('id')) {
+        luke.animate({ top: '66px', left: '109px'});
+      } else if (avatar.attr('id') === vader.attr('id')) {
+        vader.animate({ top: '66px', left: '-103px'});
+      } else {
+        boba.animate({ top: '66px', left: '-303px' });
+      }
     }
   } else {
     //   Both die
@@ -289,7 +297,7 @@ function beginGame() {
 
   // Opponent Boba Fett
   boba.click(function() {
-    BobaOpponent();
+    bobaOpponent();
   });
 }
 
