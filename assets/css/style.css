@@ -2,8 +2,68 @@ body {
   background-image: url("../images/space.jpg");
   background-repeat: no-repeat;
   width: 100%;
+  height: 100%;
+  overflow: hidden;
   text-align: center;
 }
+
+/* Please note that I did not write this code - I added it as a fun intro effect and credited the source. DO not include in homework grade. */
+
+.fade {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  top: -25px;
+  /* background-image: linear-gradient(0deg, transparent, black 75%); */
+  z-index: 1;
+}
+
+.creditRoll {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 800px;
+  color: #feda4a;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 500%;
+  font-weight: 600;
+  letter-spacing: 6px;
+  line-height: 125%;
+  perspective: 400px;
+  text-align: justify;
+  font-size: 6rem;
+}
+
+.crawl {
+  position: relative;
+  top: 9999px;
+  transform-origin: 50% 100%;
+  animation: crawl 90s linear;
+}
+
+.crawl > .title {
+  font-size: 90%;
+  text-align: center;
+}
+
+.crawl > .title h1 {
+  margin: 0 0 100px;
+  text-transform: uppercase;
+}
+
+@keyframes crawl {
+  0% {
+    top: 0;
+    transform: rotateX(20deg)  translateZ(0);
+  }
+  100% { 
+    top: -6000px;
+    transform: rotateX(25deg) translateZ(-2500px);
+  }
+}
+
+/* Begin code for homework */
+
 #pageWrap {
   width: 1000px;
   height: 100%;
@@ -12,7 +72,8 @@ body {
   display: inline-block;
 }
 
-h1 {
+#star, 
+#wars {
   text-align: center;
   font-family: "Titillium Web", sans-serif;
   letter-spacing: 5px;
@@ -144,17 +205,4 @@ button {
   box-shadow: 0px 0px 32px 3px rgba(26, 237, 93, 0.81);
   top: -396px;
   left: -307px;
-}
-
-#howToPlay {
-  text-align: center;
-  font-family: "Titillium Web", sans-serif;
-  letter-spacing: 5px;
-  font-size: 3rem;
-  font-weight: bold;
-  color: black;
-  text-shadow: -1px -1px 0 yellow, 1px -1px 0 yellow, -1px 1px 0 yellow,
-    1px 1px 0 yellow;
-  padding: 0;
-  display: block;
 }
